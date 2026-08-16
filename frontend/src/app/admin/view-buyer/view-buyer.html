@@ -1,0 +1,183 @@
+<div class="dashboard">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content">
+        <!-- ========================================= -->
+        <!-- PAGE HEADER -->
+        <!-- ========================================= -->
+        <div class="page-header">
+            <h1>Buyer Details</h1>
+            <p>
+                Complete information about the buyer.
+            </p>
+        </div>
+        <!-- ========================================= -->
+        <!-- LOADING -->
+        <!-- ========================================= -->
+        @if (loading) {
+            <div class="profile-card">
+                <h3>
+                    Loading buyer details...
+                </h3>
+            </div>
+        }
+        <!-- ========================================= -->
+        <!-- BUYER DETAILS -->
+        <!-- ========================================= -->
+        @if (!loading && buyer) {
+            <div class="profile-card">
+                <!-- PROFILE IMAGE -->
+                <div class="profile-image">
+                    <img
+                        src="images/profile.jpg"
+                        alt="Buyer">
+                </div>
+                <div class="row">
+                    <!-- NAME -->
+                    <div class="col-md-6 mb-3">
+                        <label>
+                            Buyer Name
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            [value]="buyer.name || '-'"
+                            readonly>
+                    </div>
+                    <!-- EMAIL -->
+                    <div class="col-md-6 mb-3">
+                        <label>
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            [value]="buyer.email || '-'"
+                            readonly>
+                    </div>
+                    <!-- MOBILE -->
+                    <div class="col-md-6 mb-3">
+                        <label>
+                            Mobile
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            [value]="buyer.mobile || '-'"
+                            readonly>
+                    </div>
+                    <!-- CITY -->
+                    <div class="col-md-6 mb-3">
+                        <label>
+                            City
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            [value]="buyer.city || '-'"
+                            readonly>
+                    </div>
+                    <!-- STATE -->
+                    <div class="col-md-6 mb-3">
+                        <label>
+                            State
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            [value]="buyer.state || '-'"
+                            readonly>
+                    </div>
+                    <!-- PINCODE -->
+                    <div class="col-md-6 mb-3">
+                        <label>
+                            Pincode
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            [value]="buyer.pincode || '-'"
+                            readonly>
+                    </div>
+                    <!-- STATUS -->
+                    <div class="col-md-6 mb-3">
+                        <label>
+                            Status
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            [value]="buyer.status || 'Pending'"
+                            readonly>
+                    </div>
+                    <!-- ROLE -->
+                    <div class="col-md-6 mb-3">
+                        <label>
+                            Role
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            [value]="buyer.role || '-'"
+                            readonly>
+                    </div>
+                    <!-- ADDRESS -->
+                    <div class="col-12 mb-3">
+                        <label>
+                            Address
+                        </label>
+                        <textarea
+                            rows="4"
+                            class="form-control"
+                            readonly>{{ buyer.address || '-' }}</textarea>
+                    </div>
+                </div>
+                <!-- ========================================= -->
+                <!-- BUTTONS -->
+                <!-- ========================================= -->
+                <div class="buttons">
+                    <!-- APPROVE -->
+                    @if (buyer.status !== 'Active') {
+                        <button
+                            type="button"
+                            class="btn btn-success"
+                            (click)="approveBuyer()">
+                            Approve
+                        </button>
+                    }
+                    <!-- BLOCK -->
+                    @if (buyer.status !== 'Blocked') {
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            (click)="blockBuyer()">
+                            Block
+                        </button>
+                    }
+                    <!-- BACK -->
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="goBack()">
+                        Back
+                    </button>
+                </div>
+            </div>
+        }
+        <!-- ========================================= -->
+        <!-- BUYER NOT FOUND / ERROR -->
+        <!-- ========================================= -->
+        @if (!loading && !buyer) {
+            <div class="profile-card">
+                <h3>
+                    {{ errorMessage || 'Buyer not found.' }}
+                </h3>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="goBack()">
+                    Back
+                </button>
+            </div>
+        }
+    </div>
+</div>

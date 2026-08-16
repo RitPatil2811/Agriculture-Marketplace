@@ -1,0 +1,128 @@
+<div class="dashboard">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div>
+                <h1>Manage Buyers</h1>
+                <p>
+                    View and manage registered buyers.
+                </p>
+            </div>
+        </div>
+        <!-- Filters -->
+        <div class="filters">
+            <input type="text" placeholder="Search Buyer..." [(ngModel)]="searchText">
+            <select [(ngModel)]="selectedStatus">
+                <option value="All">
+                    All
+                </option>
+                <option value="Active">
+                    Active
+                </option>
+                <option value="Pending">
+                    Pending
+                </option>
+                <option value="Blocked">
+                    Blocked
+                </option>
+            </select>
+        </div>
+        <!-- Table -->
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>City</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (buyer of filteredBuyers; track buyer.id) {
+                    <tr>
+                        <!-- ID -->
+                        <td>
+                            {{ buyer.id }}
+                        </td>
+                        <!-- Photo -->
+                        <td>
+                            <img src="images/profile.jpg" class="profile-img" alt="Buyer">
+                        </td>
+                        <!-- Name -->
+                        <td>
+                            {{ buyer.name }}
+                        </td>
+                        <!-- Email -->
+                        <td>
+                            {{ buyer.email }}
+                        </td>
+                        <!-- Mobile -->
+                        <td>
+                            {{ buyer.mobile }}
+                        </td>
+                        <!-- City -->
+                        <td>
+                            {{ buyer.city || '-' }}
+                        </td>
+                        <!-- Status -->
+                        <td>
+                            <span class="status" [class.active]="buyer.status === 'Active'" [class.pending]="
+                                        buyer.status === 'Pending' ||
+                                        !buyer.status
+                                    " [class.blocked]="buyer.status === 'Blocked'">
+                                {{ buyer.status || 'Pending' }}
+                            </span>
+                        </td>
+                        <!-- Actions -->
+                        <td>
+                            <div class="actions">
+                                <!-- View -->
+                                <a class="btn btn-success btn-sm" [routerLink]="[
+                                            '/admin/view-buyer',
+                                            buyer.id
+                                        ]">
+                                    View
+                                </a>
+                                <!-- Approve -->
+                                @if (
+                                buyer.status !== 'Active'
+                                ) {
+                                <button class="btn btn-primary btn-sm" (click)="approveBuyer(buyer)">
+                                    Approve
+                                </button>
+                                }
+                                <!-- Block -->
+                                @if (
+                                buyer.status !== 'Blocked'
+                                ) {
+                                <button class="btn btn-warning btn-sm" (click)="blockBuyer(buyer)">
+                                    Block
+                                </button>
+                                }
+                                <!-- Delete -->
+                                <button class="btn btn-danger btn-sm" (click)="deleteBuyer(buyer.id)">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                    <!-- No data -->
+                    @if (filteredBuyers.length === 0) {
+                    <tr>
+                        <td colspan="8" style="text-align: center;">
+                            No buyers found.
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

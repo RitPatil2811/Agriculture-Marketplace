@@ -1,0 +1,35 @@
+<div class="login-page">
+    <div class="login-card">
+        <h2>Welcome Back</h2>
+        <p>Select Login Type</p>
+        <div class="roles">
+            <div class="role-card" [class.active]="role=='Farmer'" (click)="role='Farmer'">
+                <i class="bi bi-tree-fill"></i>
+                <h4>Farmer</h4>
+            </div>
+            <div class="role-card" [class.active]="role=='Buyer'" (click)="role='Buyer'">
+                <i class="bi bi-cart-fill"></i>
+                <h4>Buyer</h4>
+            </div>
+            <div class="role-card" [class.active]="role=='Admin'" (click)="role='Admin'">
+                <i class="bi bi-person-workspace"></i>
+                <h4>Admin</h4>
+            </div>
+        </div>
+        <div class="form">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="email" placeholder="Enter Email">
+            <label>Password</label>
+            <input type="password" [(ngModel)]="password" placeholder="Enter Password">
+            <button class="login-btn" (click)="login()">
+                Login
+            </button>
+            <div class="register-link" >
+                <span>Don't have an account?</span>
+                <a routerLink="/register">
+                    Register
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

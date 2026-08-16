@@ -1,0 +1,83 @@
+<div class="dashboard">
+    <app-buyer-sidebar></app-buyer-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <div>
+                <h1>Shopping Cart</h1>
+                <p>Review your selected products</p>
+            </div>
+        </div>
+        @if(loading){
+        <div class="empty-cart">
+            <div class="spinner"></div>
+            <h2>Loading Cart...</h2>
+            <p>Please wait while we load your cart.</p>
+        </div>
+        }
+        @else if(cartItems.length>0){
+        <div class="cart-container">
+            <div class="cart-items">
+                @for(item of cartItems;track item.id){
+                <div class="cart-card">
+                    <img [src]="getImageUrl(item.image)" [alt]="item.name">
+                    <div class="details">
+                        <h3>{{item.name}}</h3>
+                        <p>{{item.category}}</p>
+                        <h4>₹{{item.price}} / {{item.unit}}</h4>
+                    </div>
+                    <div class="quantity">
+                        <button (click)="decrease(item)">
+                            <i class="bi bi-dash">-</i>
+                        </button>
+                        <span>{{item.quantity}}</span>
+                        <button (click)="increase(item)">
+                            <i class="bi bi-plus">+</i>
+                        </button>
+                    </div>
+                    <div class="total">
+                        ₹{{item.price*item.qty}}
+                    </div>
+                    <button class="btn btn-danger remove-btn" (click)="remove(item.id)">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+                }
+            </div>
+            <div class="summary">
+                <h2>Order Summary</h2>
+                <hr>
+                <div class="summary-row">
+                    <span>Total Items</span>
+                    <span>{{totalItems}}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery Charges</span>
+                    <span>Free</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total Amount</span>
+                    <span>₹{{grandTotal}}</span>
+                </div>
+                <button routerLink="/buyer/checkout" class="btn btn-success checkout-btn">
+                    <i class="bi bi-credit-card"></i>
+                    Proceed To Checkout
+                </button>
+                <button class="btn btn-outline-danger mt-3 w-100" (click)="clearCart()">
+                    <i class="bi bi-trash"></i>
+                    Clear Cart
+                </button>
+            </div>
+        </div>
+        }
+        @else{
+        <div class="empty-cart">
+            <i class="bi bi-cart-x"></i>
+            <h2>Your Cart is Empty</h2>
+            <p>Looks like you haven't added any products yet.</p>
+            <a routerLink="/buyer/products" class="btn btn-success continue-shopping-btn">
+                Continue Shopping
+            </a>
+        </div>
+        }
+    </div>
+</div>

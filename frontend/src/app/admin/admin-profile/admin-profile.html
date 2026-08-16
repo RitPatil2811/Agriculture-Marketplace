@@ -1,0 +1,58 @@
+<div class="dashboard">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <div>
+                <h1>Admin Profile</h1>
+                <p>Manage your personal information.</p>
+            </div>
+        </div>
+        <div class="profile-container">
+            <!-- Left -->
+            <div class="profile-card">
+                <img [src]="admin.image" class="profile-img">
+                <h2>{{admin.name}}</h2>
+                <p>{{admin.role}}</p>
+                <a routerLink="/admin/edit-profile" class="btn btn-success w-100 mt-3 edit-profile-btn">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit Profile
+                </a>
+            </div>
+            <!-- Right -->
+            <div class="details-card">
+                <h3>Personal Information</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 info-box">
+                        <label>Full Name</label>
+                        <p>{{admin.name}}</p>
+                    </div>
+                    <div class="col-md-6 info-box">
+                        <label>Email</label>
+                        <p>{{admin.email}}</p>
+                    </div>
+                    <div class="col-md-6 info-box">
+                        <label>Mobile Number</label>
+                        <p>{{admin.mobile}}</p>
+                    </div>
+                    <div class="col-md-6 info-box">
+                        <label>Role</label>
+                        <p>{{admin.role}}</p>
+                    </div>
+                    <div class="col-md-6 info-box">
+                        <label>Address</label>
+                        <p>{{admin.address}}</p>
+                    </div>
+                    <div class="col-md-6 info-box">
+                        <label>City</label>
+                        <p>{{admin.city}}</p>
+                    </div>
+                    <div class="col-md-6 info-box">
+                        <label>State</label>
+                        <p>{{admin.state}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

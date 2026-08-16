@@ -1,0 +1,136 @@
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f6fa;
+}
+
+.content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 30px;
+}
+
+.page-header {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.page-header h1 {
+    margin: 0;
+    color: #198754;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin-top: 8px;
+    margin-bottom: 0;
+    color: #777;
+}
+
+.form-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-control {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.form-control:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 3px rgba(25,135,84,.12);
+    outline: none;
+}
+
+.button-section {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.btn {
+    padding: 11px 22px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-success {
+    background: #198754;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #157347;
+}
+
+.btn-success:disabled {
+    background: #8bbda3;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5c636a;
+}
+
+.loading-container {
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media(max-width: 768px) {
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .button-section {
+        flex-direction: column;
+    }
+
+    .button-section button {
+        width: 100%;
+    }
+}

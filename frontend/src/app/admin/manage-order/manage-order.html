@@ -1,0 +1,115 @@
+<div class="dashboard">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <div>
+                <h1>Manage Orders</h1>
+                <p>Monitor all buyer orders.</p>
+            </div>
+        </div>
+        <div class="filters">
+            <input type="text" placeholder="Search Order..." [(ngModel)]="searchText">
+            <select [(ngModel)]="status">
+                <option value="All">
+                    All
+                </option>
+                <option value="Pending">
+                    Pending
+                </option>
+                <option value="Accepted">
+                    Accepted
+                </option>
+                <option value="Shipped">
+                    Shipped
+                </option>
+                <option value="Delivered">
+                    Delivered
+                </option>
+                <option value="Cancelled">
+                    Cancelled
+                </option>
+            </select>
+        </div>
+        @if (loading) {
+        <div class="table-card loading">
+            <h3>Loading orders...</h3>
+        </div>
+        }
+        @else if (filteredOrders.length === 0) {
+        <div class="table-card empty">
+            <h3>No Orders Found</h3>
+            <p>There are no orders matching your search.</p>
+        </div>
+        }
+        @else {
+        <div class="table-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Buyer ID</th>
+                            <th>Farmer ID</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (
+                        order of filteredOrders;
+                        track order.orderId
+                        ) {
+                        <tr>
+                            <td>
+                                #{{ order.orderId }}
+                            </td>
+                            <td>
+                                {{ order.buyerId }}
+                            </td>
+                            <td>
+                                {{ order.farmerId }}
+                            </td>
+                            <td>
+                                {{ order.product }}
+                            </td>
+                            <td>
+                                {{ order.quantity }}
+                                {{ order.unit }}
+                            </td>
+                            <td>
+                                ₹{{ order.total }}
+                            </td>
+                            <td>
+                                <span class="status" [class.pending]="order.status === 'Pending'"
+                                    [class.accepted]="order.status === 'Accepted'"
+                                    [class.shipped]="order.status === 'Shipped'"
+                                    [class.delivered]="order.status === 'Delivered'"
+                                    [class.cancelled]="order.status === 'Cancelled'">
+                                    {{ order.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="actions">
+                                    <a class="btn btn-success btn-sm" [routerLink]="[
+                                                    '/admin/view-order',
+                                                    order.orderId
+                                                ]">
+                                        View
+                                    </a>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteOrder(order.orderId)">
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+    </div>
+</div>

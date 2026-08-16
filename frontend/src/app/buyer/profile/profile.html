@@ -1,0 +1,124 @@
+<div class="dashboard">
+
+    <app-buyer-sidebar></app-buyer-sidebar>
+
+    <div class="content">
+
+        @if (loading) {
+
+            <div class="loading-container">
+                <h3>Loading profile...</h3>
+            </div>
+
+        }
+
+        @if (!loading && buyer) {
+
+            <div class="page-header">
+                <h1>My Profile</h1>
+                <p>Manage your personal information</p>
+            </div>
+
+            <div class="profile-card">
+
+                <div class="profile-left">
+
+                    <img
+                        src="images/profile.jpg"
+                        class="profile-img"
+                        alt="Profile Picture">
+
+                    <h2>{{ buyer.name }}</h2>
+
+                    <p class="member">
+                        Buyer Account
+                    </p>
+
+                    <button
+                        routerLink="/buyer/edit-profile"
+                        class="btn btn-success">
+
+                        <i class="bi bi-pencil-square"></i>
+                        Edit Profile
+
+                    </button>
+
+                </div>
+
+                <div class="profile-right">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th>Full Name</th>
+                            <td>{{ buyer.name }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ buyer.email }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Mobile</th>
+                            <td>{{ buyer.mobile }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Address</th>
+                            <td>{{ buyer.address }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>City</th>
+                            <td>{{ buyer.city }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>State</th>
+                            <td>{{ buyer.state }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Pincode</th>
+                            <td>{{ buyer.pincode }}</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="stat-card green">
+                    <h2>{{ buyer.totalOrders }}</h2>
+                    <p>Total Orders</p>
+                </div>
+
+                <div class="stat-card blue">
+                    <h2>₹{{ buyer.totalSpent }}</h2>
+                    <p>Total Spending</p>
+                </div>
+
+                <div class="stat-card orange">
+                    <h2>{{ buyer.memberSince }}</h2>
+                    <p>Member Since</p>
+                </div>
+
+            </div>
+
+        }
+
+        @if (!loading && !buyer) {
+
+            <div class="loading-container">
+                <h3>Buyer profile not found.</h3>
+            </div>
+
+        }
+
+    </div>
+
+</div>

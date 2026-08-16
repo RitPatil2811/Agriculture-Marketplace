@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background: #f4f6f9;
+}
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f6f9;
+}
+.login-card {
+    width: 480px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .1);
+}
+.login-card h2 {
+    text-align: center;
+    color: #198754;
+    margin-bottom: 10px;
+}
+.login-card p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+.roles {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.role-card {
+    flex: 1;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 20px 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+.role-card:hover {
+    border-color: #198754;
+    transform: translateY(-5px);
+}
+.role-card.active {
+    background: #198754;
+    color: white;
+    border-color: #198754;
+}
+.role-card i {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+.role-card h4 {
+    font-size: 17px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.form label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
+.form input {
+    height: 48px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0 15px;
+    font-size: 14px;
+}
+.form input:focus {
+    border-color: #198754;
+    outline: none;
+}
+.login-btn {
+    margin-top: 30px;
+    height: 48px;
+    border: none;
+    background: #198754;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+.login-btn:hover {
+    background: #157347;
+}
+
+.register-link{
+    margin-top:20px;
+    text-align:center;
+    font-size:15px;
+    color:#666;
+}
+
+.register-link a{
+    color:#198754;
+    text-decoration:none;
+    font-weight:600;
+    margin-left:5px;
+    transition:.3s;
+}
+
+.register-link a:hover{
+    text-decoration:underline;
+    color:#146c43;
+}
+@media(max-width:768px) {
+    .login-card {
+        width: 90%;
+        padding: 25px;
+    }
+    .roles {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,206 @@
+<div class="dashboard">
+
+    <app-admin-sidebar></app-admin-sidebar>
+
+    <div class="content">
+
+        <div class="page-header">
+            <div>
+                <h1>Manage Farmers</h1>
+                <p>View and manage all registered farmers.</p>
+            </div>
+        </div>
+
+
+        <!-- Search and Filter -->
+        <div class="filters">
+
+            <input
+                type="text"
+                placeholder="Search Farmer..."
+                [(ngModel)]="searchText">
+
+            <select [(ngModel)]="selectedStatus">
+
+                <option value="All">All</option>
+                <option value="Active">Active</option>
+                <option value="Pending">Pending</option>
+                <option value="Blocked">Blocked</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Farmer Table -->
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>City</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    @for (farmer of filteredFarmers; track farmer.id) {
+
+                        <tr>
+
+                            <!-- ID -->
+                            <td>
+                                {{ farmer.id }}
+                            </td>
+
+
+                            <!-- Photo -->
+                            <td>
+                                <img
+                                    src="images/profile.jpg"
+                                    class="profile-img"
+                                    alt="Farmer">
+                            </td>
+
+
+                            <!-- Name -->
+                            <td>
+                                {{ farmer.name }}
+                            </td>
+
+
+                            <!-- Email -->
+                            <td>
+                                {{ farmer.email }}
+                            </td>
+
+
+                            <!-- Mobile -->
+                            <td>
+                                {{ farmer.mobile }}
+                            </td>
+
+
+                            <!-- City -->
+                            <td>
+                                {{ farmer.city || '-' }}
+                            </td>
+
+
+                            <!-- Status -->
+                            <td>
+
+                                <span
+                                    class="status"
+                                    [class.active]="(farmer.status || 'Pending') === 'Active'"
+                                    [class.pending]="(farmer.status || 'Pending') === 'Pending'"
+                                    [class.blocked]="(farmer.status || 'Pending') === 'Blocked'">
+
+                                    {{ farmer.status || 'Pending' }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- Actions -->
+                            <td>
+
+                                <div class="actions">
+
+                                    <!-- VIEW BUTTON -->
+                                    <a
+                                        class="btn btn-success btn-sm"
+                                        [routerLink]="[
+                                            '/admin/view-farmer',
+                                            farmer.id
+                                        ]">
+
+                                        View
+
+                                    </a>
+
+
+                                    <!-- APPROVE BUTTON -->
+                                    @if (farmer.status === 'Pending' || !farmer.status) {
+
+                                        <button
+                                            class="btn btn-primary btn-sm"
+                                            (click)="approveFarmer(farmer)">
+
+                                            Approve
+
+                                        </button>
+
+                                    }
+
+
+                                    <!-- BLOCK BUTTON -->
+                                    @if (farmer.status !== 'Blocked') {
+
+                                        <button
+                                            class="btn btn-warning btn-sm"
+                                            (click)="blockFarmer(farmer)">
+
+                                            Block
+
+                                        </button>
+
+                                    }
+
+
+                                    <!-- DELETE BUTTON -->
+                                    <button
+                                        class="btn btn-danger btn-sm"
+                                        (click)="deleteFarmer(farmer.id)">
+
+                                        Delete
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+
+                    <!-- No farmers found -->
+                    @if (filteredFarmers.length === 0) {
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                style="text-align: center; padding: 30px;">
+
+                                No farmers found.
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

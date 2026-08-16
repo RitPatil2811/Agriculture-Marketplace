@@ -1,0 +1,108 @@
+<div class="dashboard">
+    <app-buyer-sidebar></app-buyer-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <h1>Checkout</h1>
+            <p>Complete your purchase</p>
+        </div>
+        <div class="checkout-container">
+            <!-- Left Side -->
+            <div class="checkout-form">
+                <div class="card">
+                    <h3>Delivery Address</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Full Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer"
+                                placeholder="Enter Full Name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Mobile Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Mobile Number"
+                                [(ngModel)]="mobile" name="mobile">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label>Address</label>
+                            <textarea rows="3" class="form-control" placeholder="Enter Address" [(ngModel)]="address"
+                                name="address"></textarea>
+                        </div>
+                        <div class="row g-4">
+                            <label>City</label>
+                            <input type="text" class="form-control" [(ngModel)]="city" name="city">
+                        </div>
+                        <div class="row g-4">
+                            <label>State</label>
+                            <input type="text" class="form-control" [(ngModel)]="state" name="state">
+                        </div>
+                        <div class="row g-4">
+                            <label>Pincode</label>
+                            <input type="text" class="form-control" [(ngModel)]="pincode" name="pincode">
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <h3>Payment Method</h3>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" checked>
+                        Cash On Delivery
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment">
+                        UPI
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment">
+                        Credit / Debit Card
+                    </div>
+                </div>
+            </div>
+            <!-- Right Side -->
+            <div class="order-summary">
+                <div class="card">
+
+                    <h3>Order Summary</h3>
+
+                    <hr>
+
+                    <div class="summary-row">
+                        <span>Total Items</span>
+                        <span>{{ totalItems }}</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>₹{{ subtotal }}</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Delivery Charge</span>
+                        <span>₹{{ deliveryCharge }}</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>₹{{ grandTotal }}</span>
+                    </div>
+
+                    <button class="btn btn-success w-100 mt-3" (click)="placeOrder()"
+                        [disabled]="placingOrder || cartEmpty">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        {{ placingOrder ? 'Placing Order...' : 'Place Order' }}
+
+                    </button>
+
+                    <button routerLink="/buyer/cart" class="btn btn-outline-secondary w-100 mt-2">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

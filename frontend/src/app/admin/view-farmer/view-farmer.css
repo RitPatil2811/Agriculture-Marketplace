@@ -1,0 +1,311 @@
+/* =========================================
+   MAIN LAYOUT
+   ========================================= */
+
+.dashboard {
+    min-height: 100vh;
+    background: #f5f7f9;
+}
+
+
+/* =========================================
+   CONTENT AREA
+   ========================================= */
+
+.content {
+    margin-left: 330px;
+    padding: 30px;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   PAGE HEADER
+   ========================================= */
+
+.page-header {
+    background: white;
+    padding: 25px 35px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.page-header h1 {
+    margin: 0;
+    color: #198754;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.page-header p {
+    margin: 8px 0 0;
+    color: #555;
+    font-size: 16px;
+}
+
+
+/* =========================================
+   FARMER DETAILS CARD
+   ========================================= */
+
+.details-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   PROFILE IMAGE
+   ========================================= */
+
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.profile-img {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 4px solid #198754;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   DETAILS GRID
+   ========================================= */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 25px;
+}
+
+
+/* =========================================
+   FORM GROUP
+   ========================================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Labels */
+
+.form-group label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+
+/* =========================================
+   INPUT FIELDS
+   ========================================= */
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d5dbe1;
+    border-radius: 8px;
+
+    background: #f9fafb;
+
+    font-size: 15px;
+    color: #222;
+
+    outline: none;
+}
+
+
+/* Readonly fields */
+
+.form-group input:read-only,
+.form-group textarea:read-only {
+    cursor: default;
+}
+
+
+/* Address */
+
+.form-group textarea {
+    min-height: 100px;
+    resize: none;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Full width */
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.status-active {
+    color: #198754;
+    font-weight: 600;
+}
+
+.status-pending {
+    color: #d39e00;
+    font-weight: 600;
+}
+
+.status-blocked {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   BUTTON AREA
+   ========================================= */
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 30px;
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e5e5;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.btn {
+    border: none;
+    border-radius: 6px;
+
+    padding: 11px 25px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+/* Approve */
+
+.btn-success {
+    background: #198754;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #157347;
+}
+
+
+/* Block */
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #bb2d3b;
+}
+
+
+/* Back */
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5c636a;
+}
+
+
+/* =========================================
+   LOADING
+   ========================================= */
+
+.details-card h3 {
+    text-align: center;
+    color: #666;
+    padding: 30px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1000px) {
+
+    .content {
+        margin-left: 280px;
+        padding: 20px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .page-header {
+        padding: 20px;
+    }
+
+    .details-card {
+        padding: 20px;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,95 @@
+<div class="dashboard">
+    <app-buyer-sidebar></app-buyer-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <div>
+                <h1>My Orders</h1>
+                <p>Track all your purchased products</p>
+            </div>
+        </div>
+        @if(loading) {
+        <div class="orders-card">
+            <h3>Loading orders...</h3>
+        </div>
+        }
+        @else if(orders.length === 0) {
+        <div class="orders-card">
+            <h3>No Orders Found</h3>
+            <p>You have not placed any orders yet.</p>
+            <a routerLink="/buyer/products" class="btn btn-success">
+                Continue Shopping
+            </a>
+        </div>
+        }
+        @else {
+        <div class="orders-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Order ID</th>
+                            <th>Product</th>
+                            <th>Date</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(order of orders; track order.orderId) {
+                        <tr>
+                            <td>
+                                @if(order.productImage) {
+                                <img [src]="'http://localhost:8080' + order.productImage" [alt]="order.product"
+                                    class="product-img">
+                                }
+                                @else {
+                                <div class="image-loading">
+                                    No Image
+                                </div>
+                                }
+                            </td>
+                            <td>
+                                #{{order.orderId}}
+                            </td>
+                            <td>
+                                {{order.product}}
+                            </td>
+                            <td>
+                                {{order.orderDate | date:'dd MMM yyyy'}}
+                            </td>
+                            <td>
+                                {{order.quantity}} {{order.unit}}
+                            </td>
+                            <td>
+                                ₹{{order.total}}
+                            </td>
+                            <td>
+                                <span [class.pending]="order.status == 'Pending'"
+                                    [class.accepted]="order.status == 'Accepted'"
+                                    [class.shipped]="order.status == 'Shipped'"
+                                    [class.delivered]="order.status == 'Delivered'"
+                                    [class.cancelled]="order.status == 'Cancelled'">
+                                    {{order.status}}
+                                </span>
+                            </td>
+                            <td>
+                                @if(order.status=='Pending'){
+                                <button class="btn btn-danger btn-sm" (click)="cancelOrder(order.orderId)">
+                                    Cancel
+                                </button>
+                                }@else{
+                                <span class="text-muted">---</span>
+                                }
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+    </div>
+</div>

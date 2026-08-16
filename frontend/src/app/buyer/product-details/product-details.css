@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background: #f4f6f9;
+}
+.content {
+    margin-left: 250px;
+    padding: 25px;
+}
+.back-btn {
+    background: #198754;
+    color: #fff;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.product-container {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 38px;
+    max-width: 950px;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+}
+.image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-section img {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+.details-section h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.category {
+    display: inline-block;
+    background: #198754;
+    color: white;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+.details-section h2 {
+    color: #198754;
+    font-size: 30px;
+    margin: 12px 0;
+}
+.unit {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 17px;
+}
+.status {
+    margin-bottom: 18px;
+}
+.instock {
+    background: #198754;
+    color: white;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.low {
+    background: #ffc107;
+    color: #222;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.out {
+    background: #dc3545;
+    color: white;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.quantity {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+.description h4 {
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+.description p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 16px;
+}
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+.buttons .btn {
+    width: 155px;
+    height: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+}
+@media(max-width:992px) {
+    .product-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        max-width: 700px;
+    }
+    .image-section img {
+        max-width: 280px;
+        height: 280px;
+    }
+    .buttons {
+        justify-content: center;
+    }
+}
+@media(max-width:768px) {
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    .product-container {
+        padding: 22px;
+    }
+    .buttons {
+        flex-direction: column;
+    }
+    .buttons .btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,106 @@
+<div class="dashboard">
+    <app-buyer-sidebar></app-buyer-sidebar>
+    <div class="content">
+        <div class="welcome-card">
+            <div>
+                <h1>Welcome Buyer 👋</h1>
+                <p>Buy fresh vegetables, fruits, grains and spices directly from farmers.</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card green">
+                <div class="card-icon"><i class="bi bi-bag-check-fill"></i></div>
+                <h1>{{totalOrders}}</h1>
+                <p>Total Orders</p>
+            </div>
+            <div class="card blue">
+                <div class="card-icon"><i class="bi bi-cart-fill"></i></div>
+                <h1>{{cartItems}}</h1>
+                <p>Cart Items</p>
+            </div>
+            <div class="card yellow">
+                <div class="card-icon"><i class="bi bi-cash-stack"></i></div>
+                <h1>₹{{totalSpent}}</h1>
+                <p>Total Spending</p>
+            </div>
+            <div class="card red">
+                <div class="card-icon"><i class="bi bi-clock-history"></i></div>
+                <h1>{{pendingOrders}}</h1>
+                <p>Pending Orders</p>
+            </div>
+        </div>
+        <div class="products-card">
+            <div class="card-header">
+                <h2>Featured Products</h2>
+                <a routerLink="/buyer/products" class="view-btn">View All</a>
+            </div>
+            <div class="product-grid">
+                @for(product of featuredProducts;track product.id){
+                <div class="product-card">
+                    <img [src]="product.image" [alt]="product.name">
+                    <h4>{{product.name}}</h4>
+                    <p class="price">₹{{product.price}} / {{product.unit}}</p>
+                    <div class="buttons">
+                        <a [routerLink]="['/buyer/product-details',product.id]" class="btn btn-success btn-sm">View</a>
+                        <button class="btn btn-primary btn-sm" (click)="addToCart(product)">Add Cart</button>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="orders-card">
+            <div class="card-header">
+                <h2>Recent Orders</h2>
+                <a routerLink="/buyer/orders" class="view-btn">View All</a>
+            </div>
+            @if(recentOrders.length>0){
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Order ID</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(order of recentOrders;track order.orderId){
+                        <tr>
+                            <td>
+                                <img [src]="getImageUrl(order.image)" [alt]="order.product" class="order-img">
+                            </td>
+                            <td>#{{order.orderId}}</td>
+                            <td>{{order.product}}</td>
+                            <td>{{order.quantity}} {{order.unit}}</td>
+                            <td>₹{{order.price}}</td>
+                            <td>₹{{order.total}}</td>
+                            <td>
+                                <span [class.pending]="order.status==='Pending'"
+                                    [class.accepted]="order.status==='Accepted'"
+                                    [class.shipped]="order.status==='Shipped'"
+                                    [class.delivered]="order.status==='Delivered'"
+                                    [class.cancelled]="order.status==='Cancelled'">
+                                    {{order.status}}
+                                </span>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            }
+            @else{
+            <div class="empty-orders">
+                <i class="bi bi-bag-x"></i>
+                <h3>No Orders Yet</h3>
+                <p>You have not placed any orders yet.</p>
+                <a routerLink="/buyer/products" class="btn btn-success">Start Shopping</a>
+            </div>
+            }
+        </div>
+    </div>
+</div>

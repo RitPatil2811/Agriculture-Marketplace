@@ -1,0 +1,51 @@
+<div class="dashboard">
+    <app-buyer-sidebar></app-buyer-sidebar>
+    <div class="content">
+        <button routerLink="/buyer/products" class="back-btn">
+            <i class="bi bi-arrow-left"></i>
+            Back to Products
+        </button>
+        <div class="product-container">
+            <div class="image-section">
+                @if(product){
+                <img [src]="'http://localhost:8080'+product.image" [alt]="product.name">
+                }
+            </div>
+            <div class="details-section">
+                <h1>{{product.name}}</h1>
+                <span class="category">
+                    {{product.category}}
+                </span>
+                <h2>₹{{product.price}}</h2>
+                <p class="unit">
+                    Price per {{product.unit}}
+                </p>
+                <div class="status">
+                    <span [class.instock]="product.status=='In Stock'" [class.low]="product.status=='Low Stock'"
+                        [class.out]="product.status=='Out Of Stock'">
+                        {{product.status}}
+                    </span>
+                </div>
+                <div class="quantity">
+                    <strong>Available Quantity :</strong>
+                    {{product.quantity}} {{product.unit}}
+                </div>
+                <div class="description">
+                    <h4>Description</h4>
+                    <p>
+                        {{product.description}}
+                    </p>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-success" (click)="addToCart()">
+                        <i class="bi bi-cart-plus"></i>
+                        Add to Cart
+                    </button>
+                    <button class="btn btn-warning" (click)="buyNow()">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

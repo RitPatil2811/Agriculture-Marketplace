@@ -1,0 +1,68 @@
+<div class="register-container">
+    <div class="register-card">
+        <h2 class="text-center text-success">
+            Register
+        </h2>
+        <form (ngSubmit)="register()">
+            <div class="mb-3">
+                <label>Full Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    [(ngModel)]="user.name"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    [(ngModel)]="user.email"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label>Mobile</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="mobile"
+                    [(ngModel)]="user.mobile"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label>Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    [(ngModel)]="user.password"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label>Select Role</label>
+                <select
+                    class="form-select"
+                    name="role"
+                    [(ngModel)]="user.role"
+                    required>
+                    <option value="">Select Role</option>
+                    <option value="BUYER">Buyer</option>
+                    <option value="FARMER">Farmer</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+            </div>
+            <button
+                type="submit"
+                class="btn btn-success w-100">
+                Register
+            </button>
+        </form>
+        <div class="text-center mt-3 have-account">
+            <a routerLink="/login">
+                Already have an account?
+            </a>
+        </div>
+    </div>
+</div>

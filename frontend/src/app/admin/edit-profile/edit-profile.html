@@ -1,0 +1,68 @@
+<div class="dashboard">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <div>
+                <h1>Edit Profile</h1>
+                <p>Update your administrator account details.</p>
+            </div>
+        </div>
+        <div class="profile-form">
+            <div class="profile-image">
+                <div class="image-wrapper">
+                    <img [src]="admin.image" alt="Admin Profile">
+                </div>
+
+                <label for="photoInput" class="change-photo-btn">
+                    <i class="bi bi-camera-fill"></i>
+                    Change Photo
+                </label>
+
+                <input id="photoInput" type="file" accept="image/png,image/jpeg,image/jpg"
+                    (change)="changePhoto($event)" hidden>
+
+                <p class="photo-info">
+                    JPG, PNG or JPEG · Maximum 2 MB
+                </p>
+            </div>
+            <form>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="admin.name" name="name">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label>Email Address</label>
+                        <input type="email" class="form-control" [(ngModel)]="admin.email" name="email">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label>Mobile Number</label>
+                        <input type="text" class="form-control" [(ngModel)]="admin.mobile" name="mobile">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label>City</label>
+                        <input type="text" class="form-control" [(ngModel)]="admin.city" name="city">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label>State</label>
+                        <input type="text" class="form-control" [(ngModel)]="admin.state" name="state">
+                    </div>
+                    <div class="col-12 mb-4">
+                        <label>Address</label>
+                        <textarea rows="4" class="form-control" [(ngModel)]="admin.address" name="address"></textarea>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="save-btn" (click)="updateProfile()">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Save Changes
+                    </button>
+                    <button type="button" class="cancel-btn" (click)="cancel()">
+                        <i class="bi bi-x-circle-fill"></i>
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

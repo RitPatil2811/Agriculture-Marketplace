@@ -1,0 +1,18 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: #f4fff5;
+}
+.register-card {
+    width: 500px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+}
+.have-account a{
+    font-size: 14px;
+    color:#198754;
+}

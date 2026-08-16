@@ -1,0 +1,126 @@
+<div class="dashboard">
+    <!-- Admin Sidebar -->
+    <app-admin-sidebar></app-admin-sidebar>
+    <!-- Main Content -->
+    <div class="content">
+        <!-- ============================= -->
+        <!-- WELCOME CARD -->
+        <!-- ============================= -->
+        <div class="welcome-card">
+            <div>
+                <h1>Welcome Admin 👋</h1>
+                <p>
+                    Manage farmers, buyers, products and marketplace activities.
+                </p>
+            </div>
+            <div class="welcome-icon">
+                <i class="bi bi-shield-check"></i>
+            </div>
+        </div>
+        <!-- ============================= -->
+        <!-- DASHBOARD CARDS -->
+        <!-- ============================= -->
+        <div class="cards">
+            <div class="card green">
+                <i class="bi bi-person-badge-fill"></i>
+                <h1>
+                    {{ loading ? '...' : totalFarmers }}
+                </h1>
+                <p>Total Farmers</p>
+            </div>
+            <div class="card blue">
+                <i class="bi bi-people-fill"></i>
+                <h1>
+                    {{ loading ? '...' : totalBuyers }}
+                </h1>
+                <p>Total Buyers</p>
+            </div>
+            <div class="card orange">
+                <i class="bi bi-box-seam-fill"></i>
+                <h1>
+                    {{ loading ? '...' : totalProducts }}
+                </h1>
+                <p>Total Products</p>
+            </div>
+            <div class="card purple">
+                <i class="bi bi-bag-check-fill"></i>
+                <h1>
+                    {{ loading ? '...' : totalOrders }}
+                </h1>
+                <p>Total Orders</p>
+            </div>
+            <div class="card teal">
+                <i class="bi bi-currency-rupee"></i>
+                <h1>
+                    {{ loading ? '...' : '₹' + totalRevenue }}
+                </h1>
+                <p>Total Revenue</p>
+            </div>
+            <div class="card red">
+                <i class="bi bi-hourglass-split"></i>
+                <h1>
+                    {{ loading ? '...' : pendingApprovals }}
+                </h1>
+                <p>Pending Approvals</p>
+            </div>
+        </div>
+        <!-- ============================= -->
+        <!-- RECENT FARMERS -->
+        <!-- ============================= -->
+        <div class="table-card">
+            <!-- Table Header -->
+            <div class="card-header">
+                <h2>
+                    Recent Farmers
+                </h2>
+            </div>
+            <!-- Farmers Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            City
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- REAL FARMERS FROM DATABASE -->
+                    @for (
+                    farmer of recentFarmers;
+                    track farmer.id
+                    ) {
+                    <tr>
+                        <td>
+                            {{ farmer.name }}
+                        </td>
+                        <td>
+                            {{ farmer.city || '-' }}
+                        </td>
+                        <td>
+                            <span class="status" [class.active]="farmer.status === 'Active'"
+                                [class.blocked]="farmer.status === 'Blocked'"
+                                [class.pending]="!farmer.status || farmer.status === 'Pending'">
+                                {{ farmer.status || 'Pending' }}
+                            </span>
+                        </td>
+                    </tr>
+                    }
+                    <!-- NO FARMERS -->
+                    @if (recentFarmers.length === 0) {
+                    <tr>
+                        <td colspan="3">
+                            No farmers found.
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

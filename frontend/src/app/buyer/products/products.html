@@ -1,0 +1,79 @@
+<div class="dashboard">
+    <app-buyer-sidebar></app-buyer-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <h1>Products</h1>
+            <p>Explore fresh products from farmers</p>
+        </div>
+        <div class="filter-section">
+            <input type="text" class="form-control" placeholder="Search products..." [(ngModel)]="searchText">
+            <select class="form-select" [(ngModel)]="selectedCategory">
+                <option *ngFor="let category of categories" [value]="category">
+                    {{category}}
+                </option>
+            </select>
+        </div>
+        <div *ngIf="loading" class="loading-container">
+            <div class="spinner"></div>
+            <h3>Loading products...</h3>
+        </div>
+        <div *ngIf="!loading && filteredProducts.length === 0" class="empty-container">
+            <i class="bi bi-box-seam"></i>
+            <h2>No products found</h2>
+            <p>
+                Try another search or category.
+            </p>
+        </div>
+        <div *ngIf="!loading && filteredProducts.length > 0" class="product-grid">
+            <div class="product-card" *ngFor="let product of filteredProducts">
+                <div class="image-container">
+                    <img [src]="'http://localhost:8080' + product.image" [alt]="product.name">
+                    <span class="status" [ngClass]="{
+                            'in-stock': product.quantity > 10,
+                            'low-stock': product.quantity > 0 && product.quantity <= 10,
+                            'out-stock': product.quantity <= 0
+                        }">
+                        {{
+                        product.quantity <= 0 ? 'Out Of Stock' : product.quantity <=10 ? 'Low Stock' : 'In Stock' }}
+                            </span>
+                </div>
+                <div class="product-info">
+                    <h2>
+                        {{product.name}}
+                    </h2>
+                    <p class="category">
+                        {{product.category}}
+                    </p>
+                    <p class="description">
+                        {{product.description}}
+                    </p>
+                    <div class="product-details">
+                        <div>
+                            <span class="label">
+                                Price
+                            </span>
+                            <strong>
+                                ₹{{product.price}}
+                            </strong>
+                        </div>
+                        <div>
+                            <span class="label">
+                                Available
+                            </span>
+                            <strong>
+                                {{product.quantity}}
+                                {{product.unit}}
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="view-btn" [routerLink]="['/buyer/product-details', product.id]">
+                            <i class="bi bi-eye"></i>
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

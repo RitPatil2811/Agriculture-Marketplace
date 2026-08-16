@@ -1,0 +1,112 @@
+<div class="dashboard">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div>
+                <h1>Manage Products</h1>
+                <p>Manage all products uploaded by farmers.</p>
+            </div>
+        </div>
+        <!-- Filters -->
+        <div class="filters">
+            <input type="text" placeholder="Search Product..." [(ngModel)]="searchText">
+            <select [(ngModel)]="category">
+                <option value="All">All</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Grains">Grains</option>
+            </select>
+        </div>
+        <!-- Error Message -->
+        @if(errorMessage){
+        <div class="error-message">
+            {{ errorMessage }}
+        </div>
+        }
+        <!-- Loading Message -->
+        @if(loading){
+        <div class="loading">
+            Loading products...
+        </div>
+        }
+        <!-- Product Table -->
+        <div class="table-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Farmer ID</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(product of filteredProducts; track product.id){
+                        <tr>
+                            <!-- ID -->
+                            <td>
+                                {{ product.id }}
+                            </td>
+                            <!-- Image -->
+                            <td>
+                                <img [src]="'http://localhost:8080' + product.image" [alt]="product.name"
+                                    class="product-image">
+                            </td>
+                            <!-- Product Name -->
+                            <td>
+                                {{ product.name }}
+                            </td>
+                            <!-- Farmer ID -->
+                            <td>
+                                {{ product.farmerId }}
+                            </td>
+                            <!-- Category -->
+                            <td>
+                                {{ product.category }}
+                            </td>
+                            <!-- Price -->
+                            <td>
+                                ₹{{ product.price }}/{{ product.unit }}
+                            </td>
+                            <!-- Status -->
+                            <td>
+                                <span class="status" [class.approved]="product.status === 'Approved'"
+                                    [class.pending]="product.status === 'Pending'"
+                                    [class.rejected]="product.status === 'Rejected'">
+                                    {{ product.status || 'Pending' }}
+                                </span>
+                            </td>
+                            <!-- Actions -->
+                            <td>
+                                <div class="actions">
+                                    <!-- View -->
+                                    <a class="btn btn-success btn-sm" [routerLink]="[
+                                                '/admin/view-product',
+                                                product.id
+                                            ]">
+                                        View
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                        <!-- No Products -->
+                        @if(filteredProducts.length === 0 && !loading){
+                        <tr>
+                            <td colspan="8" style="text-align: center;">
+                                No products found.
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

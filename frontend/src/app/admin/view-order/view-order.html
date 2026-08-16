@@ -1,0 +1,112 @@
+<div class="dashboard">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <h1>Order Details</h1>
+            <p>Complete information about the selected order.</p>
+        </div>
+        @if (loading) {
+        <div class="order-card loading-card">
+            <h3>Loading order details...</h3>
+        </div>
+        }
+        @else if (errorMessage) {
+        <div class="order-card error-card">
+            <h3>{{ errorMessage }}</h3>
+            <a routerLink="/admin/orders" class="btn btn-secondary">
+                Back to Orders
+            </a>
+        </div>
+        }
+        @else if (order) {
+        <div class="order-card">
+            <div class="row">
+                <!-- Order ID -->
+                <div class="col-md-6 mb-3">
+                    <label>Order ID</label>
+                    <input class="form-control" [value]="'#' + order.orderId" readonly>
+                </div>
+                <!-- Buyer -->
+                <div class="col-md-6 mb-3">
+                    <label>Buyer</label>
+                    <input class="form-control" [value]="order.customer" readonly>
+                </div>
+                <!-- Buyer ID -->
+                <div class="col-md-6 mb-3">
+                    <label>Buyer ID</label>
+                    <input class="form-control" [value]="order.buyerId" readonly>
+                </div>
+                <!-- Farmer ID -->
+                <div class="col-md-6 mb-3">
+                    <label>Farmer ID</label>
+                    <input class="form-control" [value]="order.farmerId" readonly>
+                </div>
+                <!-- Product -->
+                <div class="col-md-6 mb-3">
+                    <label>Product</label>
+                    <input class="form-control" [value]="order.product" readonly>
+                </div>
+                <!-- Product ID -->
+                <div class="col-md-6 mb-3">
+                    <label>Product ID</label>
+                    <input class="form-control" [value]="order.productId" readonly>
+                </div>
+                <!-- Quantity -->
+                <div class="col-md-6 mb-3">
+                    <label>Quantity</label>
+                    <input class="form-control" [value]="order.quantity + ' ' + order.unit" readonly>
+                </div>
+                <!-- Price -->
+                <div class="col-md-6 mb-3">
+                    <label>Price</label>
+                    <input class="form-control" [value]="'₹' + order.price + ' / ' + order.unit" readonly>
+                </div>
+                <!-- Total -->
+                <div class="col-md-6 mb-3">
+                    <label>Total Amount</label>
+                    <input class="form-control" [value]="'₹' + order.total" readonly>
+                </div>
+                <!-- Status -->
+                <div class="col-md-6 mb-3">
+                    <label>Status</label>
+                    <input class="form-control" [value]="order.status" readonly>
+                </div>
+                <!-- Order Date -->
+                <div class="col-md-6 mb-3">
+                    <label>Order Date</label>
+                    <input class="form-control" [value]="order.orderDate | date:'dd MMM yyyy, hh:mm a'" readonly>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="buttons">
+                @if (order.status === 'Pending') {
+                <button class="btn btn-success" (click)="updateStatus('Accepted')">
+                    Accept
+                </button>
+                }
+                @if (order.status === 'Accepted') {
+                <button class="btn btn-warning" (click)="updateStatus('Shipped')">
+                    Ship
+                </button>
+                }
+                @if (order.status === 'Shipped') {
+                <button class="btn btn-dark" (click)="updateStatus('Delivered')">
+                    Deliver
+                </button>
+                }
+                @if (
+                order.status !== 'Delivered' &&
+                order.status !== 'Cancelled'
+                ) {
+                <button class="btn btn-danger" (click)="updateStatus('Cancelled')">
+                    Cancel
+                </button>
+                }
+                <a routerLink="/admin/manage-order" class="btn btn-secondary">
+                    Back
+                </a>
+            </div>
+        </div>
+        }
+    </div>
+</div>
