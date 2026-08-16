@@ -1,0 +1,127 @@
+<div class="container py-4">
+    <button class="btn btn-success mb-4 backbtn" (click)="goBack()" >
+        <i class="bi bi-arrow-left"></i>
+        Back to Orders
+    </button>
+    @if (loading) {
+    <div class="loading-container">
+        <div class="spinner-border text-success" role="status"></div>
+        <p>Loading order...</p>
+    </div>
+    } @else if (order) {
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white">
+            <h3 class="mb-0">Order Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Order ID</th>
+                            <td>#{{order.orderId}}</td>
+                        </tr>
+                        <tr>
+                            <th>Buyer</th>
+                            <td>{{order.customer}}</td>
+                        </tr>
+                        <tr>
+                            <th>Product</th>
+                            <td>{{order.product}}</td>
+                        </tr>
+                        <tr>
+                            <th>Quantity</th>
+                            <td>{{order.quantity}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Amount</th>
+                            <td>₹{{order.total}}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                                <span class="status"
+                                    [class.pending]="order.status==='Pending'"
+                                    [class.accepted]="order.status==='Accepted'"
+                                    [class.shipped]="order.status==='Shipped'"
+                                    [class.delivered]="order.status==='Delivered'"
+                                    [class.cancelled]="order.status==='Cancelled'">
+                                    {{order.status}}
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Order Date</th>
+                            <td>{{order.orderDate | date:'dd MMM yyyy, hh:mm a'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Buyer ID</th>
+                            <td>{{order.buyerId}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div class="status-section">
+                <h4>Update Order Status</h4>
+                @if (order.status === 'Pending') {
+                <button class="btn btn-success me-2"
+                    (click)="updateStatus('Accepted')"
+                    [disabled]="updatingStatus">
+                    Accept Order
+                </button>
+                <button class="btn btn-danger"
+                    (click)="updateStatus('Cancelled')"
+                    [disabled]="updatingStatus">
+                    Cancel Order
+                </button>
+                }
+                @if (order.status === 'Accepted') {
+                <button class="btn btn-primary"
+                    (click)="updateStatus('Shipped')"
+                    [disabled]="updatingStatus">
+                    Mark as Shipped
+                </button>
+                }
+                @if (order.status === 'Shipped') {
+                <button class="btn btn-success"
+                    (click)="updateStatus('Delivered')"
+                    [disabled]="updatingStatus">
+                    Mark as Delivered
+                </button>
+                }
+                @if (order.status === 'Delivered') {
+                <div class="alert alert-success mt-3 mb-0">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Order has been delivered successfully.
+                </div>
+                }
+                @if (order.status === 'Cancelled') {
+                <div class="alert alert-danger mt-3 mb-0">
+                    <i class="bi bi-x-circle-fill"></i>
+                    This order has been cancelled.
+                </div>
+                }
+                @if (updatingStatus) {
+                <div class="mt-3 text-success">
+                    <div class="spinner-border spinner-border-sm"></div>
+                    Updating order status...
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    } @else {
+    <div class="no-order">
+        <h3>Order not found</h3>
+        <p>The requested order could not be found.</p>
+        <button class="btn btn-success" (click)="goBack()">
+            Back to Orders
+        </button>
+    </div>
+    }
+</div>

@@ -1,0 +1,93 @@
+<app-sidebar></app-sidebar>
+<div class="content">
+    <div class="page-header">
+        <div>
+            <h1>Earnings</h1>
+            <p>Track your income and payments</p>
+        </div>
+    </div>
+    <div class="cards">
+        <div class="card green">
+            <h2>₹{{ totalEarnings }}</h2>
+            <p>Total Earnings</p>
+        </div>
+        <div class="card blue">
+            <h2>₹{{ thisMonthEarnings }}</h2>
+            <p>This Month</p>
+        </div>
+        <div class="card orange">
+            <h2>{{ totalOrders }}</h2>
+            <p>Total Orders</p>
+        </div>
+        <div class="card red">
+            <h2>₹{{ pendingPayment }}</h2>
+            <p>Pending Payment</p>
+        </div>
+    </div>
+    <div class="filter-section">
+        <input type="text" class="form-control" placeholder="Search Product..." [(ngModel)]="searchText">
+        <select class="form-select" [(ngModel)]="selectedMonth">
+            <option value="All">All</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+    </div>
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of filteredEarnings; track item.id) {
+                <tr>
+                    <td>
+                        #{{ item.id }}
+                    </td>
+                    <td>
+                        {{ item.date }}
+                    </td>
+                    <td>
+                        {{ item.product }}
+                    </td>
+                    <td>
+                        {{ item.quantity }}
+                    </td>
+                    <td>
+                        ₹{{ item.amount }}
+                    </td>
+                    <td>
+                        <span class="status" [class.paid]="item.status === 'Paid'"
+                            [class.pending]="item.status === 'Pending'" [class.cancelled]="item.status === 'Cancelled'">
+                            {{ item.status }}
+                        </span>
+                    </td>
+                </tr>
+                }
+                @if (filteredEarnings.length === 0) {
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 30px;">
+                        No earnings found.
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

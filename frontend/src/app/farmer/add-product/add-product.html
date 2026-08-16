@@ -1,0 +1,68 @@
+<div class="dashboard">
+    <app-sidebar></app-sidebar>
+    <div class="content">
+        <div class="form-card">
+            <div class="page-header">
+                <h2>Add Product</h2>
+                <p>Add a new agricultural product to your marketplace.</p>
+            </div>
+            <form (ngSubmit)="addProduct()">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" class="form-control" name="name" [(ngModel)]="product.name"
+                            placeholder="Enter Product Name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Category</label>
+                        <select class="form-select" name="category" [(ngModel)]="product.category" required>
+                            <option value="" disabled>Select Category</option>
+                            <option value="Vegetables">Vegetables</option>
+                            <option value="Fruits">Fruits</option>
+                            <option value="Grains">Grains</option>
+                            <option value="Spices">Spices</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Price</label>
+                        <input type="number" class="form-control" name="price" [(ngModel)]="product.price"
+                            placeholder="Enter Price" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" class="form-control" name="quantity" [(ngModel)]="product.quantity"
+                            placeholder="Enter Quantity" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Unit</label>
+                        <select class="form-select" name="unit" [(ngModel)]="product.unit" required>
+                            <option value="" disabled>Select Unit</option>
+                            <option value="Kg">Kg</option>
+                            <option value="Quintal">Quintal</option>
+                            <option value="Piece">Piece</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Product Image</label>
+                        <input type="file" class="form-control" name="image" accept="image/*"
+                            (change)="onImageSelected($event)" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea rows="5" class="form-control" name="description" [(ngModel)]="product.description"
+                            placeholder="Enter Product Description" required>
+                        </textarea>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-success px-4">
+                            Save Product
+                        </button>
+                        <button type="reset" class="btn btn-secondary px-4 ms-2">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

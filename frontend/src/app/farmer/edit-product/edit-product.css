@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+}
+
+.edit-page {
+    min-height: 100vh;
+    background: #f4f6f9;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+
+/* CARD */
+
+.edit-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* HEADER */
+
+.card-header {
+    background: #198754;
+    color: white;
+    padding: 25px 30px;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.card-header p {
+    margin: 5px 0 0;
+    opacity: 0.9;
+}
+
+
+/* BODY */
+
+.card-body {
+    padding: 30px;
+}
+
+
+/* LABEL */
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+
+/* INPUT */
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #198754;
+
+    box-shadow:
+        0 0 0 0.2rem
+        rgba(25, 135, 84, 0.15);
+}
+
+
+/* TEXTAREA */
+
+textarea {
+    resize: vertical;
+}
+
+
+/* IMAGE */
+
+.product-image {
+    width: 220px;
+    height: 220px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    border: 3px solid #198754;
+
+    margin-top: 10px;
+}
+
+
+/* BUTTON */
+
+.btn {
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-weight: 600;
+}
+
+
+/* LOADING */
+
+.loading-container {
+    min-height: 400px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.loading-container p {
+    margin-top: 15px;
+
+    font-size: 18px;
+
+    color: #666;
+}
+
+
+/* NOT FOUND */
+
+.not-found {
+    min-height: 400px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.08);
+}
+
+.not-found i {
+    font-size: 50px;
+
+    color: #dc3545;
+
+    margin-bottom: 15px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .edit-page {
+        padding: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-header {
+        padding: 20px;
+    }
+
+    .btn {
+        width: 100%;
+
+        margin: 5px 0 !important;
+    }
+
+    .product-image {
+        width: 180px;
+        height: 180px;
+    }
+}

@@ -1,0 +1,172 @@
+<div class="dashboard">
+    <app-sidebar></app-sidebar>
+    <div class="content">
+        <!-- Welcome Card -->
+        <div class="welcome-card">
+            <div>
+                <h1>Farmer Dashboard</h1>
+                <p>Welcome {{farmerName}} 👋</p>
+            </div>
+            <div class="welcome-icon">
+                <i class="bi bi-tree-fill"></i>
+            </div>
+        </div>
+        <!-- Dashboard Cards -->
+        <div class="cards">
+            <div class="card green">
+                <div class="card-icon">
+                    <i class="bi bi-box-seam-fill"></i>
+                </div>
+                <h1>{{totalProducts}}</h1>
+                <p>Total Products</p>
+            </div>
+            <div class="card blue">
+                <div class="card-icon">
+                    <i class="bi bi-cart-check-fill"></i>
+                </div>
+                <h1>{{totalOrders}}</h1>
+                <p>Orders Received</p>
+            </div>
+            <div class="card yellow">
+                <div class="card-icon">
+                    <i class="bi bi-currency-rupee"></i>
+                </div>
+                <h1>₹{{totalRevenue}}</h1>
+                <p>Total Revenue</p>
+            </div>
+            <div class="card red">
+                <div class="card-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <h1>{{lowStock}}</h1>
+                <p>Low Stock</p>
+            </div>
+        </div>
+        <!-- Recent Orders -->
+        <div class="orders-card">
+            <div class="card-header">
+                <h2>Recent Orders</h2>
+                <a routerLink="/farmer/orders" class="view-btn">
+                    View All
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Buyer</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(order of recentOrders; track order.orderId){
+                        <tr>
+                            <td>
+                                #{{order.orderId}}
+                            </td>
+                            <td>
+                                {{order.customer}}
+                            </td>
+                            <td>
+                                {{order.product}}
+                            </td>
+                            <td>
+                                {{order.quantity}} {{order.unit}}
+                            </td>
+                            <td>
+                                <span class="status" [class.pending]="order.status==='Pending'"
+                                    [class.accepted]="order.status==='Accepted'"
+                                    [class.shipped]="order.status==='Shipped'"
+                                    [class.delivered]="order.status==='Delivered'"
+                                    [class.cancelled]="order.status==='Cancelled'">
+                                    {{order.status}}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="action-btn" [routerLink]="['/farmer/view-order',order.orderId]">
+                                    <i class="bi bi-eye-fill"></i>
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                        @if(recentOrders.length===0){
+                        <tr>
+                            <td colspan="6" class="no-orders">
+                                No orders found.
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Bottom Section -->
+        <div class="bottom-section">
+            <div class="left-section">
+                <div class="chart-card">
+                    <h2>Monthly Sales</h2>
+                    <div class="chart">
+                        @for(item of monthlySales;track item.month){
+                        <div class="chart-item">
+                            <div class="bar" [style.height.px]="getBarHeight(item.amount)"></div>
+                            <span>{{item.month}}</span>
+                        </div>
+                        }
+                    </div>
+                </div>
+                <div class="stock-card">
+                    <h2>Low Stock Alerts</h2>
+                    <ul>
+                        @for(product of lowStockProducts;track product.id){
+                        <li>
+                            {{product.name}}
+                            <span>{{product.quantity}} {{product.unit}} Left</span>
+                        </li>
+                        }
+                        @if(lowStockProducts.length===0){
+                        <li>
+                            <span>No low stock products</span>
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="top-product-card">
+                    <h2>Top Selling Products</h2>
+                    <ul>
+                        @for(product of topSellingProducts;track product.product){
+                        <li>
+                            {{product.product}}
+                            <span>{{product.quantity}} Kg</span>
+                        </li>
+                        }
+                        @if(topSellingProducts.length===0){
+                        <li>
+                            <span>No sales available</span>
+                        </li>
+                        }
+                    </ul>
+                </div>
+                <div class="profile-card">
+                    @if(farmer){
+                    <img [src]="farmer.profileImage || 'images/profile.jpg'" alt="Profile Picture">
+                    <h3>{{farmer.name}}</h3>
+                    <p>{{farmer.role}}</p>
+                    <p>📍 {{farmer.address}}</p>
+                    <p>📞 {{farmer.mobile}}</p>
+                    }
+                    <button routerLink="/farmer/edit-profile" class="edit-btn">
+                        <i class="bi bi-pencil-fill"></i>
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

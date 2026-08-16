@@ -1,0 +1,50 @@
+<app-sidebar></app-sidebar>
+<div class="content">
+    <div class="page-header">
+        <h2>Edit Profile</h2>
+        <p>Update your personal information</p>
+    </div>
+    <div class="profile-form">
+        <form (ngSubmit)="updateProfile()">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="farmer.name" name="name">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Email</label>
+                    <input type="email" class="form-control" [(ngModel)]="farmer.email" name="email">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Mobile</label>
+                    <input type="text" class="form-control" [(ngModel)]="farmer.mobile" name="mobile">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Farm Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="farmer.farmName" name="farmName">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Experience</label>
+                    <input type="text" class="form-control" [(ngModel)]="farmer.experience" name="experience">
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label>Address</label>
+                    <textarea rows="4" class="form-control" [(ngModel)]="farmer.address" name="address">
+                    </textarea>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label>Joined Date</label>
+                    <input type="date" class="form-control" [(ngModel)]="farmer.joined" name="joined">
+                </div>
+                <div class="col-md-12 mt-3">
+                    <button class="btn btn-success" type="submit" (click)="updateProfile()">
+                        Save Changes
+                    </button>
+                    <a routerLink="/farmer/profile" class="btn btn-secondary ms-2">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

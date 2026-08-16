@@ -1,0 +1,61 @@
+<app-sidebar></app-sidebar>
+<div class="profile-page">
+    <div class="page-header">
+        <h1>My Profile</h1>
+        <p>Manage your profile information</p>
+    </div>
+    <div class="profile-card">
+        <div class="profile-left">
+            <img [src]="farmer.image" class="profile-img">
+            <h2>{{farmer.name}}</h2>
+            <p>Farmer</p>
+            <button routerLink="/farmer/edit-profile" class="edit-btn">
+                <i class="bi bi-pencil-fill"></i>
+                Edit Profile
+            </button>
+        </div>
+        <div class="profile-right">
+            <div class="info-box">
+                <label>Email</label>
+                <p>{{farmer.email}}</p>
+            </div>
+            <div class="info-box">
+                <label>Mobile</label>
+                <p>{{farmer.mobile}}</p>
+            </div>
+            <div class="info-box">
+                <label>Address</label>
+                <p>{{farmer.address}}</p>
+            </div>
+            <div class="info-box">
+                <label>Farm Name</label>
+                <p>{{farmer.farmName}}</p>
+            </div>
+            <div class="info-box">
+                <label>Experience</label>
+                <p>{{farmer.experience}}</p>
+            </div>
+            <div class="info-box">
+                <label>Joined</label>
+                <p>{{farmer.joined}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="stats">
+        <div class="stat-card green">
+            <i class="bi bi-box-seam"></i>
+            <h2>{{farmer.totalProducts}}</h2>
+            <p>Total Products</p>
+        </div>
+        <div class="stat-card blue">
+            <i class="bi bi-bag-check"></i>
+            <h2>{{farmer.totalOrders}}</h2>
+            <p>Total Orders</p>
+        </div>
+        <div class="stat-card yellow">
+            <i class="bi bi-cash-stack"></i>
+            <h2>{{farmer.totalEarnings}}</h2>
+            <p>Total Earnings</p>
+        </div>
+    </div>
+</div>

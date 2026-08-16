@@ -1,0 +1,370 @@
+<div class="edit-page">
+
+    <div class="container py-4">
+
+
+        <!-- BACK BUTTON -->
+
+        <button
+            type="button"
+            class="btn btn-success mb-4"
+            (click)="cancel()">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Products
+
+        </button>
+
+
+        <!-- ============================ -->
+        <!-- LOADING -->
+        <!-- ============================ -->
+
+        <div
+            *ngIf="loading"
+            class="loading-container">
+
+            <div
+                class="spinner-border text-success">
+            </div>
+
+            <p>
+                Loading product...
+            </p>
+
+        </div>
+
+
+        <!-- ============================ -->
+        <!-- EDIT FORM -->
+        <!-- ============================ -->
+
+        <div
+            *ngIf="!loading && product"
+            class="edit-card">
+
+
+            <!-- HEADER -->
+
+            <div class="card-header">
+
+                <h2>
+                    Edit Product
+                </h2>
+
+                <p>
+                    Update your product information
+                </p>
+
+            </div>
+
+
+            <!-- BODY -->
+
+            <div class="card-body">
+
+
+                <form
+                    (ngSubmit)="updateProduct()"
+                    #productForm="ngForm">
+
+
+                    <div class="row">
+
+
+                        <!-- PRODUCT NAME -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>
+                                Product Name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                [(ngModel)]="product.name"
+                                name="name"
+                                required>
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>
+                                Category
+                            </label>
+
+                            <select
+                                class="form-select"
+                                [(ngModel)]="product.category"
+                                name="category"
+                                required>
+
+                                <option value="">
+                                    Select Category
+                                </option>
+
+                                <option value="Vegetables">
+                                    Vegetables
+                                </option>
+
+                                <option value="Fruits">
+                                    Fruits
+                                </option>
+
+                                <option value="Grains">
+                                    Grains
+                                </option>
+
+                                <option value="Spices">
+                                    Spices
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- PRICE -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>
+                                Price
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                [(ngModel)]="product.price"
+                                name="price"
+                                min="0"
+                                required>
+
+                        </div>
+
+
+                        <!-- QUANTITY -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>
+                                Quantity
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                [(ngModel)]="product.quantity"
+                                name="quantity"
+                                min="0"
+                                required>
+
+                        </div>
+
+
+                        <!-- UNIT -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>
+                                Unit
+                            </label>
+
+                            <select
+                                class="form-select"
+                                [(ngModel)]="product.unit"
+                                name="unit"
+                                required>
+
+                                <option value="Kg">
+                                    Kg
+                                </option>
+
+                                <option value="Quintal">
+                                    Quintal
+                                </option>
+
+                                <option value="Piece">
+                                    Piece
+                                </option>
+
+                                <option value="Dozen">
+                                    Dozen
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- IMAGE -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>
+                                Change Product Image
+                            </label>
+
+                            <input
+                                type="file"
+                                class="form-control"
+                                accept="image/*"
+                                (change)="onFileSelected($event)">
+
+                        </div>
+
+
+                        <!-- CURRENT / NEW IMAGE -->
+
+                        <div class="col-md-12 mb-4">
+
+                            <label>
+                                Product Image
+                            </label>
+
+
+                            <!-- NEW IMAGE PREVIEW -->
+
+                            <div
+                                *ngIf="previewImage">
+
+                                <p class="text-success">
+                                    New Image Preview
+                                </p>
+
+                                <img
+                                    [src]="previewImage"
+                                    class="product-image">
+
+                            </div>
+
+
+                            <!-- CURRENT IMAGE -->
+
+                            <div
+                                *ngIf="
+                                    !previewImage &&
+                                    product.image
+                                ">
+
+                                <p>
+                                    Current Image
+                                </p>
+
+                                <img
+                                    [src]="
+                                      'http://localhost:8080'
+                                      + product.image
+                                    "
+                                    [alt]="product.name"
+                                    class="product-image">
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="col-md-12 mb-4">
+
+                            <label>
+                                Description
+                            </label>
+
+                            <textarea
+                                rows="5"
+                                class="form-control"
+                                [(ngModel)]="product.description"
+                                name="description"
+                                placeholder="Enter product description">
+                            </textarea>
+
+                        </div>
+
+
+                        <!-- BUTTONS -->
+
+                        <div class="col-md-12">
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-success"
+                                [disabled]="
+                                    saving ||
+                                    productForm.invalid
+                                ">
+
+                                <span
+                                    *ngIf="saving"
+                                    class="spinner-border spinner-border-sm me-2">
+                                </span>
+
+                                {{
+                                    saving
+                                    ? 'Updating...'
+                                    : 'Update Product'
+                                }}
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary ms-2"
+                                [disabled]="saving"
+                                (click)="cancel()">
+
+                                Cancel
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ============================ -->
+        <!-- PRODUCT NOT FOUND -->
+        <!-- ============================ -->
+
+        <div
+            *ngIf="!loading && !product"
+            class="not-found">
+
+            <i class="bi bi-exclamation-circle"></i>
+
+            <h3>
+                Product not found
+            </h3>
+
+            <p>
+                Unable to load this product.
+            </p>
+
+            <button
+                class="btn btn-success"
+                (click)="cancel()">
+
+                Back to Products
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

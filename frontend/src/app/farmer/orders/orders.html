@@ -1,0 +1,133 @@
+<div class="dashboard">
+    <app-sidebar></app-sidebar>
+    <div class="content">
+        <div class="page-header">
+            <div>
+                <h1>Orders</h1>
+                <p>Manage customer orders</p>
+            </div>
+        </div>
+        <!-- SUMMARY CARDS -->
+        <div class="cards">
+            <div class="card green">
+                <h2>{{ totalOrders }}</h2>
+                <p>Total Orders</p>
+            </div>
+            <div class="card yellow">
+                <h2>{{ pendingOrders }}</h2>
+                <p>Pending</p>
+            </div>
+            <div class="card blue">
+                <h2>{{ shippedOrders }}</h2>
+                <p>Shipped</p>
+            </div>
+            <div class="card red">
+                <h2>{{ deliveredOrders }}</h2>
+                <p>Delivered</p>
+            </div>
+        </div>
+        <!-- FILTER -->
+        <div class="filter-section">
+            <input type="text" class="form-control" placeholder="Search Orders" [(ngModel)]="searchText">
+            <select class="form-select" [(ngModel)]="selectedStatus">
+                <option value="All Status">
+                    All Status
+                </option>
+                <option value="Pending">
+                    Pending
+                </option>
+                <option value="Accepted">
+                    Accepted
+                </option>
+                <option value="Shipped">
+                    Shipped
+                </option>
+                <option value="Delivered">
+                    Delivered
+                </option>
+                <option value="Cancelled">
+                    Cancelled
+                </option>
+            </select>
+        </div>
+        <!-- LOADING -->
+        @if (loading) {
+        <div class="loading-container">
+            <div class="spinner-border text-success"></div>
+            <p>
+                Loading orders...
+            </p>
+        </div>
+        }
+        <!-- ORDERS TABLE -->
+        @if (!loading) {
+        <div class="table-card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Buyer</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (
+                    order of filteredOrders;
+                    track order.orderId
+                    ) {
+                    <tr>
+                        <td>
+                            #{{ order.orderId }}
+                        </td>
+                        <td>
+                            {{ order.customer }}
+                        </td>
+                        <td>
+                            {{ order.product }}
+                        </td>
+                        <td>
+                            {{ order.quantity }}
+                        </td>
+                        <td>
+                            ₹{{ order.total }}
+                        </td>
+                        <td>
+                            <span class="status" [class.pending]="
+                                            order.status === 'Pending'
+                                        " [class.accepted]="
+                                            order.status === 'Accepted'
+                                        " [class.shipped]="
+                                            order.status === 'Shipped'
+                                        " [class.delivered]="
+                                            order.status === 'Delivered'
+                                        " [class.cancelled]="
+                                            order.status === 'Cancelled'
+                                        ">
+                                {{ order.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="view-btn" [routerLink]="['/farmer/view-order',order.orderId]">
+                                <i class="bi bi-eye-fill"></i>
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                    @if (filteredOrders.length === 0) {
+                    <tr>
+                        <td colspan="7" class="no-orders">
+                            No orders found.
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+    </div>
+</div>

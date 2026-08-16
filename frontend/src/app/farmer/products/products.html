@@ -1,0 +1,327 @@
+<div class="dashboard">
+
+  <app-sidebar></app-sidebar>
+
+  <div class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+      <div>
+        <h1>My Products</h1>
+
+        <p>
+          Manage all your agricultural products
+        </p>
+      </div>
+
+      <a routerLink="/farmer/add-product" class="add-btn">
+        <i class="bi bi-plus-circle-fill"></i>
+        Add Product
+      </a>
+
+    </div>
+
+
+    <!-- FILTER SECTION -->
+    <div class="filter-section">
+
+      <!-- SEARCH -->
+      <div class="search-box">
+
+        <i class="bi bi-search"></i>
+
+        <input type="text" placeholder="Search product..." (input)="searchProduct($event)">
+
+      </div>
+
+
+      <!-- CATEGORY -->
+      <div class="filter-box">
+
+        <select [value]="selectedCategory" (change)="filterCategory($event)">
+
+          <option value="All Categories">
+            All Categories
+          </option>
+
+          <option value="Vegetables">
+            Vegetables
+          </option>
+
+          <option value="Fruits">
+            Fruits
+          </option>
+
+          <option value="Grains">
+            Grains
+          </option>
+
+          <option value="Spices">
+            Spices
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- STOCK -->
+      <div class="filter-box">
+
+        <select [value]="selectedStock" (change)="filterStock($event)">
+
+          <option value="All Stock">
+            All Stock
+          </option>
+
+          <option value="In Stock">
+            In Stock
+          </option>
+
+          <option value="Low Stock">
+            Low Stock
+          </option>
+
+          <option value="Out Of Stock">
+            Out Of Stock
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- SUMMARY CARD -->
+    <div class="summary-card">
+
+      <div>
+
+        <h2>Total Products</h2>
+
+        <h1>
+          {{ products.length }}
+        </h1>
+
+      </div>
+
+      <div>
+
+        <i class="bi bi-basket-fill"></i>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCTS TABLE -->
+    <div class="products-table">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Image</th>
+
+            <th>Product Name</th>
+
+            <th>Category</th>
+
+            <th>Price</th>
+
+            <th>Quantity</th>
+
+            <th>Unit</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <!-- PRODUCTS -->
+          <tr *ngFor="let product of paginatedProducts">
+
+            <!-- IMAGE -->
+            <td>
+
+              <img [src]="
+                  product.image
+                    ? 'http://localhost:8080' + product.image
+                    : 'assets/no-image.png'
+                " [alt]="product.name" class="product-img">
+
+            </td>
+
+
+            <!-- NAME -->
+            <td>
+              {{ product.name }}
+            </td>
+
+
+            <!-- CATEGORY -->
+            <td>
+              {{ product.category }}
+            </td>
+
+
+            <!-- PRICE -->
+            <td>
+              ₹{{ product.price }}
+            </td>
+
+
+            <!-- QUANTITY -->
+            <td>
+              {{ product.quantity }}
+            </td>
+
+
+            <!-- UNIT -->
+            <td>
+              {{ product.unit }}
+            </td>
+
+
+            <!-- STATUS -->
+            <td>
+
+              <span class="status" [ngClass]="{
+                  'stock':
+                    product.status === 'In Stock',
+
+                  'low':
+                    product.status === 'Low Stock',
+
+                  'out':
+                    product.status === 'Out Of Stock'
+                }">
+                {{ product.status }}
+              </span>
+
+            </td>
+
+
+            <!-- ACTION -->
+            <td>
+
+              <div class="action-buttons">
+
+                <!-- VIEW -->
+                <button class="view-btn" [routerLink]="['/farmer/view-product', product.id]">
+
+                  <i class="bi bi-eye-fill"></i>
+                  View
+
+                </button>
+
+
+                <!-- EDIT -->
+                <button class="edit-btn" [routerLink]="[
+                    '/farmer/edit-product',
+                    product.id
+                  ]">
+
+                  <i class="bi bi-pencil-fill"></i>
+
+                  Edit
+
+                </button>
+
+
+                <!-- DELETE -->
+                <button class="delete-btn" (click)="deleteProduct(product.id)">
+
+                  <i class="bi bi-trash-fill"></i>
+
+                  Delete
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- NO PRODUCTS -->
+          <tr *ngIf="
+              paginatedProducts.length === 0
+            ">
+
+            <td colspan="8" class="no-products">
+
+              <i class="bi bi-box-seam"></i>
+
+              <p>
+                No products found
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+
+      <!-- PREVIOUS -->
+      <button class="page-btn" (click)="previousPage()" [disabled]="currentPage === 1">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Previous
+
+      </button>
+
+
+      <!-- PAGE NUMBERS -->
+      <div class="page-numbers">
+
+        <button *ngFor="
+            let page of [].constructor(totalPages);
+            let i = index
+          " (click)="goToPage(i + 1)" [class.active]="
+            currentPage === i + 1
+          ">
+
+          {{ i + 1 }}
+
+        </button>
+
+      </div>
+
+
+      <!-- NEXT -->
+      <button class="page-btn" (click)="nextPage()" [disabled]="
+          currentPage === totalPages
+        ">
+
+        Next
+
+        <i class="bi bi-arrow-right"></i>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

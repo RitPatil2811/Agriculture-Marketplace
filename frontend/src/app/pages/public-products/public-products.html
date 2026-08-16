@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<div class="container py-5">
+    <div class="page-header mb-4">
+        <h1>Fresh Farm Products</h1>
+        <p>Browse fresh vegetables, fruits, grains and spices directly from farmers.</p>
+    </div>
+    <!-- Search & Filter -->
+    <div class="filter-section mb-4">
+        <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" class="form-control" placeholder="Search Products..." [(ngModel)]="searchText">
+        </div>
+        <select class="form-select" [(ngModel)]="category">
+            <option>All Categories</option>
+            <option>Vegetables</option>
+            <option>Fruits</option>
+            <option>Grains</option>
+            <option>Spices</option>
+        </select>
+    </div>
+    <!-- Products -->
+    <div class="product-grid">
+        @for(product of filteredProducts; track product.id){
+        <div class="product-card">
+            <img [src]="product.image">
+            <div class="product-info">
+                <h4>{{product.name}}</h4>
+                <p>{{product.category}}</p>
+                <h3>₹{{product.price}} / {{product.unit}}</h3>
+                <span class="stock" [class.low]="product.status=='Low Stock'">
+                    {{product.status}}
+                </span>
+                <a [routerLink]="['/login']" class="btn btn-success w-100 mt-3">
+                    View Product
+                </a>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<app-footer></app-footer>
